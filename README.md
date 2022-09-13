@@ -9,6 +9,6 @@ Binary Search Trees project from Javascript section of the Full Stack Javascript
 - `levelOrder` function which accepts another function as a parameter. `levelOrder` should traverse the tree in breadth-first level order and provide each node as the argument to the provided function. The method should return an array of values if no function is given.
 - `inorder`, `preorder`, and `postorder` functions that accept a function parameter. Each of these functions should traverse the tree in their respective depth-first order and yield each node to the provided function given as an argument. The functions should return an array of values if no function is given.
 - `getHeight` function which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node.
-- `getDepth` function which accepts the root and a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.
+- `getDepth` function which accepts the tree's root and a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.
 - `isBalanced` function which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
 - `rebalance` function which rebalances an unbalanced tree.
