@@ -42,7 +42,6 @@ class Tree {
     constructor(arr) {
         this.arr = arr;
         this.root = null;
-        this.levelOrderArr = [];
         this.inorderArr = [];
         this.preorderArr = [];
         this.postorderArr = [];
@@ -149,14 +148,14 @@ class Tree {
     }
 
     levelOrder(root) {
-        this.levelOrderArr = [];
+        let levelOrderArr = [];
         if (root !== null) {
             let queue = [];
             queue.push(root);
 
             while (queue.length !== 0) {
                 let current = queue[0];
-                this.levelOrderArr.push(current.value);
+                levelOrderArr.push(current.value);
 
                 if (current.left !== null) {
                     queue.push(current.left);
@@ -170,7 +169,7 @@ class Tree {
             }
         }
 
-        return this.levelOrderArr;
+        return levelOrderArr;
     }
 
     inorder(root) {
@@ -214,6 +213,22 @@ class Tree {
             this.postorderArr.push(root.value);
         }
     }
+
+    getHeight(root) {
+        if (root === null) {
+            return null;
+        } else {
+            let leftHeight = this.getHeight(root.left);
+            let rightHeight = this.getHeight(root.right);
+   
+            if (leftHeight > rightHeight) {
+                return (leftHeight + 1);
+            } else {
+                return (rightHeight + 1);
+            }
+        }
+    }
+
 }
 
 // TEST
@@ -249,3 +264,7 @@ console.log(bstree.postorder(bstree.root));
 
 // levelOrder
 console.log(bstree.levelOrder(bstree.root));
+
+// getHeight
+console.log(bstree.getHeight(bstree.root));
+
