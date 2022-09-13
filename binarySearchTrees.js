@@ -90,10 +90,32 @@ class Tree {
         }
     }
 
+    insert(root, value) {
+        if (root === null) {
+            root = new Node(value);
+            return root;
+        }
+ 
+        if (value < root.value) {
+            root.left = this.insert(root.left, value);
+        } else if (value > root.value) { 
+            root.right = this.insert(root.right, value);
+        }
+
+        return root;
+    }
 }
 
+// TEST
 let bstree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-
 bstree.setRoot();
+
+// prettyPrint
 bstree.prettyPrint(bstree.root);
+
+// findNode
 console.log(bstree.findNode(bstree.root, 67));
+
+// insert
+bstree.insert(bstree.root, 11);
+bstree.prettyPrint(bstree.root);
