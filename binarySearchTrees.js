@@ -6,3 +6,9 @@ class Node {
     }
 }
 
+class Tree {
+    constructor(sortedArr) {
+        this.sortedArr = sortedArr;
+        this.root = null;
+    }
+}
