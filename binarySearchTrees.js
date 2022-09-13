@@ -1,4 +1,34 @@
-import { mergeSort } from "./mergeSort.js";
+function mergeSort(arr) {
+    if (arr.length < 2) {
+        return arr;
+    } else {
+        let sorted = [];
+
+        let left = mergeSort(arr.slice(0, arr.length / 2));
+        let right = mergeSort(arr.slice(arr.length / 2));
+
+        let leftPointer = 0;
+        let rightPointer = 0;
+        
+        while (sorted.length < left.length + right.length) {
+            if (rightPointer >= right.length) {
+                sorted.push(left[leftPointer]);
+                leftPointer++;
+            } else if (leftPointer >= left.length) {
+                sorted.push(right[rightPointer]);
+                rightPointer++;
+            } else if (left[leftPointer] < right[rightPointer]) {
+                sorted.push(left[leftPointer]);
+                leftPointer++;
+            } else {
+                sorted.push(right[rightPointer]);
+                rightPointer++;
+            }
+        }
+    
+        return sorted;
+    }
+}
 
 class Node {
     constructor(value) {
@@ -47,18 +77,6 @@ class Tree {
         
         if (node.left !== null) {
             this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-        }
-    }
-
-    findNode(root, value) {
-        if (root === null || root.value === value) {
-            return root;
-        }
-        
-        if (root.value < value) {
-            return this.findNode(root.right, value);
-        } else {
-            return this.findNode(root.left, value);
         }
     }
 
@@ -114,6 +132,18 @@ class Tree {
             root.value = succ.value;
     
             return root;
+        }
+    }
+
+    findNode(root, value) {
+        if (root === null || root.value === value) {
+            return root;
+        }
+        
+        if (root.value < value) {
+            return this.findNode(root.right, value);
+        } else {
+            return this.findNode(root.left, value);
         }
     }
 
