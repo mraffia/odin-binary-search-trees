@@ -245,6 +245,23 @@ class Tree {
         }
     }
 
+    isBalanced(root) {
+        if(root == null) { 
+            return true;
+        }
+
+        let leftHeight = this.getHeight(root.left)
+        let rightHeight = this.getHeight(root.right)
+    
+        if (Math.abs(leftHeight - rightHeight) <= 1 &&
+        this.isBalanced(root.left) === true && 
+        this.isBalanced(root.right) === true) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
 
 // TEST
@@ -287,3 +304,5 @@ console.log(bstree.getHeight(bstree.root));
 // getDepth
 console.log(bstree.getDepth(bstree.root, 3));
 
+// isBalanced
+console.log(bstree.isBalanced(bstree.root));
