@@ -148,6 +148,31 @@ class Tree {
         }
     }
 
+    levelOrder(root) {
+        this.levelOrderArr = [];
+        if (root !== null) {
+            let queue = [];
+            queue.push(root);
+
+            while (queue.length !== 0) {
+                let current = queue[0];
+                this.levelOrderArr.push(current.value);
+
+                if (current.left !== null) {
+                    queue.push(current.left);
+                } 
+
+                if (current.right !== null) {
+                    queue.push(current.right);
+                }
+
+                queue.shift();
+            }
+        }
+
+        return this.levelOrderArr;
+    }
+
     inorder(root) {
         this.inorderArr = [];
         this.inorderRec(root);
@@ -155,7 +180,7 @@ class Tree {
     }
 
     inorderRec(root) {
-        if (root != null) {
+        if (root !== null) {
             this.inorderRec(root.left);
             this.inorderArr.push(root.value);
             this.inorderRec(root.right);
@@ -169,7 +194,7 @@ class Tree {
     }
 
     preorderRec(root) {
-        if (root != null) {
+        if (root !== null) {
             this.preorderArr.push(root.value);
             this.preorderRec(root.left);
             this.preorderRec(root.right);
@@ -183,7 +208,7 @@ class Tree {
     }
 
     postorderRec(root) {
-        if (root != null) {
+        if (root !==  null) {
             this.postorderRec(root.left);
             this.postorderRec(root.right);
             this.postorderArr.push(root.value);
@@ -214,13 +239,13 @@ bstree.deleteNode(bstree.root, 8);
 bstree.prettyPrint(bstree.root);
 
 // inorder
-bstree.inorder(bstree.root);
-console.log(bstree.inorderArr);
+console.log(bstree.inorder(bstree.root));
 
 // preorder
-bstree.preorder(bstree.root);
-console.log(bstree.preorderArr);
+console.log(bstree.preorder(bstree.root));
 
 // postorder
-bstree.postorder(bstree.root);
-console.log(bstree.postorderArr);
+console.log(bstree.postorder(bstree.root));
+
+// levelOrder
+console.log(bstree.levelOrder(bstree.root));
