@@ -43,8 +43,7 @@ function mergeSort(arr) {
 
 class Tree {
     constructor(arr) {
-        this.arr = arr;
-        this.root = null;
+        this.root = this.buildTree(arr);
     }
 
     buildTree(arr, start, end) {
@@ -63,4 +62,6 @@ class Tree {
 
         return node;
     }
+
+
 }
