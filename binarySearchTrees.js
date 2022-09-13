@@ -162,7 +162,19 @@ class Tree {
         }
     }
 
+    preorder(root) {
+        this.preorderArr = [];
+        this.preorderRec(root);
+        return this.preorderArr;
+    }
 
+    preorderRec(root) {
+        if (root != null) {
+            this.preorderArr.push(root.value);
+            this.preorderRec(root.left);
+            this.preorderRec(root.right);
+        }
+    }
 }
 
 // TEST
@@ -190,3 +202,7 @@ bstree.prettyPrint(bstree.root);
 // inorder
 bstree.inorder(bstree.root);
 console.log(bstree.inorderArr);
+
+// prerder
+bstree.preorder(bstree.root);
+console.log(bstree.preorderArr);
