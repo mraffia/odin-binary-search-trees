@@ -90,19 +90,59 @@ class Tree {
         }
     }
 
-    insert(root, value) {
+    insertNode(root, value) {
         if (root === null) {
             root = new Node(value);
             return root;
         }
  
         if (value < root.value) {
-            root.left = this.insert(root.left, value);
+            root.left = this.insertNode(root.left, value);
         } else if (value > root.value) { 
-            root.right = this.insert(root.right, value);
+            root.right = this.insertNode(root.right, value);
         }
 
         return root;
+    }
+
+    deleteNode(root, value) {
+        if (root === null) {
+            return root;
+        }
+
+        if (root.value > value) {
+            root.left = this.deleteNode(root.left, value);
+            return root;
+        } else if (root.value < value) {
+            root.right = this.deleteNode(root.right, value);
+            return root;
+        }
+
+        if (root.left === null) {
+            let temp = root.right;
+            return temp;
+        } else if (root.right === null) {
+            let  temp = root.left;
+            return temp;
+        } else {
+            let succParent = root;
+            let succ = root.right;
+          
+            while (succ.left !== null) {
+                succParent = succ;
+                succ = succ.left;
+            }
+
+            if (succParent !== root) {
+                succParent.left = succ.right;
+            } else {
+                succParent.right = succ.right;
+            }
+
+            root.value = succ.value;
+    
+            return root;
+        }
     }
 }
 
@@ -117,5 +157,14 @@ bstree.prettyPrint(bstree.root);
 console.log(bstree.findNode(bstree.root, 67));
 
 // insert
-bstree.insert(bstree.root, 11);
+bstree.insertNode(bstree.root, 11);
+bstree.prettyPrint(bstree.root);
+
+
+// insert
+bstree.deleteNode(bstree.root, 11);
+bstree.prettyPrint(bstree.root);
+bstree.deleteNode(bstree.root, 5);
+bstree.prettyPrint(bstree.root);
+bstree.deleteNode(bstree.root, 67);
 bstree.prettyPrint(bstree.root);
