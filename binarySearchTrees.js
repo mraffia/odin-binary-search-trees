@@ -216,7 +216,7 @@ class Tree {
 
     getHeight(root) {
         if (root === null) {
-            return null;
+            return 0;
         } else {
             let leftHeight = this.getHeight(root.left);
             let rightHeight = this.getHeight(root.right);
@@ -226,6 +226,22 @@ class Tree {
             } else {
                 return (rightHeight + 1);
             }
+        }
+    }
+
+    getDepth(root, value) {
+        if (root === null) {
+            return 0;
+        }
+
+        if (root.value === value) {
+            return 1;
+        }
+        
+        if (root.value < value) {
+            return 1 + this.getDepth(root.right, value);
+        } else {
+            return 1 + this.getDepth(root.left, value);
         }
     }
 
@@ -267,4 +283,7 @@ console.log(bstree.levelOrder(bstree.root));
 
 // getHeight
 console.log(bstree.getHeight(bstree.root));
+
+// getDepth
+console.log(bstree.getDepth(bstree.root, 3));
 
