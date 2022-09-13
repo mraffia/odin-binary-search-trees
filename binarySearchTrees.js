@@ -1,6 +1,6 @@
 class Node {
-    constructor(data) {
-        this.data = data;
+    constructor(value) {
+        this.value = value;
         this.left = null;
         this.right = null;
     }
@@ -62,6 +62,7 @@ class Tree {
         let sorted = mergeSort(this.arr);
         let sortedUnique = [...new Set(sorted)];
 
+        this.arr = sortedUnique;
         this.root = this.buildTree(sortedUnique, 0, sortedUnique.length -1);
     }
 
@@ -70,10 +71,22 @@ class Tree {
             this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
         
-        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
         
         if (node.left !== null) {
             this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+        }
+    }
+
+    findNode(root, value) {
+        if (root === null || root.value === value) {
+            return root;
+        }
+        
+        if (root.value < value) {
+            return this.findNode(root.right, value);
+        } else {
+            return this.findNode(root.left, value);
         }
     }
 
@@ -83,3 +96,4 @@ let bstree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 
 bstree.setRoot();
 bstree.prettyPrint(bstree.root);
+console.log(bstree.findNode(bstree.root, 67));
