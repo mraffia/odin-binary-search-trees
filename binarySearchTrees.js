@@ -1,40 +1,10 @@
+import { mergeSort } from "./mergeSort.js";
+
 class Node {
     constructor(value) {
         this.value = value;
         this.left = null;
         this.right = null;
-    }
-}
-
-function mergeSort(arr) {
-    if (arr.length < 2) {
-        return arr;
-    } else {
-        let sorted = [];
-
-        let left = mergeSort(arr.slice(0, arr.length / 2));
-        let right = mergeSort(arr.slice(arr.length / 2));
-
-        let leftPointer = 0;
-        let rightPointer = 0;
-        
-        while (sorted.length < left.length + right.length) {
-            if (rightPointer >= right.length) {
-                sorted.push(left[leftPointer]);
-                leftPointer++;
-            } else if (leftPointer >= left.length) {
-                sorted.push(right[rightPointer]);
-                rightPointer++;
-            } else if (left[leftPointer] < right[rightPointer]) {
-                sorted.push(left[leftPointer]);
-                leftPointer++;
-            } else {
-                sorted.push(right[rightPointer]);
-                rightPointer++;
-            }
-        }
-    
-        return sorted;
     }
 }
 
@@ -290,6 +260,9 @@ bstree.prettyPrint(bstree.root);
 bstree.deleteNode(bstree.root, 8);
 bstree.prettyPrint(bstree.root);
 
+// levelOrder
+console.log(bstree.levelOrder(bstree.root));
+
 // inorder
 console.log(bstree.inorder(bstree.root));
 
@@ -298,9 +271,6 @@ console.log(bstree.preorder(bstree.root));
 
 // postorder
 console.log(bstree.postorder(bstree.root));
-
-// levelOrder
-console.log(bstree.levelOrder(bstree.root));
 
 // getHeight
 console.log(bstree.getHeight(bstree.root));
