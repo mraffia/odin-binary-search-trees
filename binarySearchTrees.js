@@ -262,6 +262,10 @@ class Tree {
         return false;
     }
 
+    rebalance() {
+        this.arr = this.inorder(this.root);
+        this.setRoot();
+    }
 }
 
 // TEST
@@ -306,3 +310,7 @@ console.log(bstree.getDepth(bstree.root, 3));
 
 // isBalanced
 console.log(bstree.isBalanced(bstree.root));
+
+// rebalance
+bstree.rebalance();
+bstree.prettyPrint(bstree.root);
