@@ -42,6 +42,10 @@ class Tree {
     constructor(arr) {
         this.arr = arr;
         this.root = null;
+        this.levelOrderArr = [];
+        this.inorderArr = [];
+        this.preorderArr = [];
+        this.postorderArr = [];
     }
 
     buildTree(arr, start, end) {
@@ -62,7 +66,6 @@ class Tree {
         let sorted = mergeSort(this.arr);
         let sortedUnique = [...new Set(sorted)];
 
-        this.arr = sortedUnique;
         this.root = this.buildTree(sortedUnique, 0, sortedUnique.length -1);
     }
 
@@ -144,6 +147,22 @@ class Tree {
             return root;
         }
     }
+
+    inorder(root) {
+        this.inorderArr = [];
+        this.inorderRec(root);
+        return this.inorderArr;
+    }
+
+    inorderRec(root) {
+        if (root != null) {
+            this.inorderRec(root.left);
+            this.inorderArr.push(root.value);
+            this.inorderRec(root.right);
+        }
+    }
+
+
 }
 
 // TEST
@@ -160,11 +179,14 @@ console.log(bstree.findNode(bstree.root, 67));
 bstree.insertNode(bstree.root, 11);
 bstree.prettyPrint(bstree.root);
 
-
-// insert
+// delete
 bstree.deleteNode(bstree.root, 11);
 bstree.prettyPrint(bstree.root);
 bstree.deleteNode(bstree.root, 5);
 bstree.prettyPrint(bstree.root);
-bstree.deleteNode(bstree.root, 67);
+bstree.deleteNode(bstree.root, 8);
 bstree.prettyPrint(bstree.root);
+
+// inorder
+bstree.inorder(bstree.root);
+console.log(bstree.inorderArr);
