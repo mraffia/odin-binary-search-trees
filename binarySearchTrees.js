@@ -15,9 +15,6 @@ function mergeSort(arr) {
         let left = mergeSort(arr.slice(0, arr.length / 2));
         let right = mergeSort(arr.slice(arr.length / 2));
 
-        console.log(left);
-        console.log(right);
-
         let leftPointer = 0;
         let rightPointer = 0;
         
@@ -43,37 +40,46 @@ function mergeSort(arr) {
 
 class Tree {
     constructor(arr) {
-        this.root = this.buildTree(arr);
+        this.arr = arr;
+        this.root = null;
     }
 
     buildTree(arr, start, end) {
-        let sorted = mergeSort(arr);
-        let sortedUnique = [...new Set(sorted)];
-
         if (start > end){
             return null;
         }
 
         let mid = parseInt((start + end) / 2);
-        let node = new Node(sortedUnique[mid]);
+        let node = new Node(arr[mid]);
 
-        node.left = buildTree(sortedUnique, start, mid - 1);
-        node.right = buildTree(sortedUnique, mid + 1, end);
+        node.left = this.buildTree(arr, start, mid - 1);
+        node.right = this.buildTree(arr, mid + 1, end);
 
         return node;
     }
 
+    setRoot() {
+        let sorted = mergeSort(this.arr);
+        let sortedUnique = [...new Set(sorted)];
+
+        this.root = this.buildTree(sortedUnique, 0, sortedUnique.length -1);
+    }
+
     prettyPrint(node, prefix = '', isLeft = true) {
         if (node.right !== null) {
-            prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+            this.prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
         }
         
         console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
         
         if (node.left !== null) {
-            prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+            this.prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
         }
     }
 
-    
 }
+
+let bstree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+
+bstree.setRoot();
+bstree.prettyPrint(bstree.root);
