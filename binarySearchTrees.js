@@ -47,7 +47,20 @@ class Tree {
         this.root = null;
     }
 
-    buildTree(arr) {
+    buildTree(arr, start, end) {
+        let sorted = mergeSort(arr);
+        let sortedUnique = [...new Set(sorted)];
 
+        if (start > end){
+            return null;
+        }
+
+        let mid = parseInt((start + end) / 2);
+        let node = new Node(sortedUnique[mid]);
+
+        node.left = buildTree(sortedUnique, start, mid - 1);
+        node.right = buildTree(sortedUnique, mid + 1, end);
+
+        return node;
     }
 }
